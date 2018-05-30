@@ -8,6 +8,7 @@
 </template>
 <script>
   import analyze from "../../apis/analyzeUrl"
+
   export default {
     name: 'HelloWorld',
     data() {

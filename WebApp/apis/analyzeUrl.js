@@ -1,9 +1,9 @@
-import ajax from ''
+import ajax from './ajax'
 const analyze = (url) => {
-  ajax.post('/api/analyze', {
+  ajax.post('/analyze', {
     url: url
   })
 }
 
 
-module.exports = analyze
+export default analyze

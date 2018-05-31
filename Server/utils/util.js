@@ -17,7 +17,10 @@ function mkdirSync(dirname) {
 }
 
 function downloadUrl(path) {
-    if (path.indexOf('http') == 0) {
+    if (path.indexOf('https') == 0) {
+
+    }
+    else if (path.indexOf('http') == 0) {
         http.get(path, function (res) {
 
             var imgData = "";

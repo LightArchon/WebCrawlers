@@ -14,7 +14,7 @@
     data() {
       return {
         msg: 'Welcome to Your Vue.js App',
-        url: ''
+        url: 'http://you.163.com'
       }
     },
     methods: {

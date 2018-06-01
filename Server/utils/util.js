@@ -4,6 +4,7 @@ const path = require('path')
 const http = require('http')
 const dirPath = path.resolve(__dirname, '../download/')
 
+let imageUrlList = [];
 function mkdirSync(dirname) {
     if (fs.existsSync(dirname)) {
         return true;
@@ -31,9 +32,7 @@ function downloadUrl(path) {
             } else {
                 var name = path.substr(last + 1, point - last)
             }
-
             res.setEncoding("binary"); //一定要设置response的编码为binary否则会下载下来的图片打不开
-
 
             res.on("data", function (chunk) {
                 imgData += chunk;
@@ -63,25 +62,28 @@ const getNewPage = async function (url) {
         javascriptEnabled: true,
         loadImages: true
     });
-    await page.on('onResourceRequested', function (requestData) {
-        console.info('Requesting', requestData.url);
-    });
+    //await page.on('onResourceRequested', function (requestData) {
+    //    console.info('Requesting', requestData.url);
+    //});
     await page.on('onResourceReceived', function (requestData) {
         var contentType = requestData.contentType
         if (/^image/.test(contentType)) {
-            downloadUrl(requestData.url)
-            console.info('Requesting', requestData.url);
+            console.info('Resource received in Phantom', requestData.url);
+            imageUrlList.push(requestData.url)
+            
+            
         }
     });
     page.evaluate(function () {
-        var inv = setInterval(function () {
-            var top = window.document.body.scrollTop;
-            window.document.body.scrollTop += 50;
-            if (top == window.document.body.scrollTop) {
-                clearInterval(inv);
-            }
-        }, 50)
-
+        $().ready(function () {
+            var inv = setInterval(function () {
+                var top = window.document.body.scrollTop;
+                window.document.body.scrollTop += 50;
+                if (top == window.document.body.scrollTop) {
+                    clearInterval(inv);
+                }
+            }, 50)
+        })
     })
 
     const status = await page.open(url);

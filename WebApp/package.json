@@ -2,7 +2,7 @@
   "name": "webapp",
   "version": "1.0.0",
   "description": "Web page developed by Vue.",
-  "author": "wangzhipeng <wangzhipeng@comisys.net>",
+  "author": "wangzhipeng",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

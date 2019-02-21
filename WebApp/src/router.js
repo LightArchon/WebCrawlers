@@ -13,7 +13,7 @@ export default new Router({
       component: Home
     },
     {
-      path: "/",
+      path: "/Crawler",
       name: "Crawler",
       component: Crawler
     },
